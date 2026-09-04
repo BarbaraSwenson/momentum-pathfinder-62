@@ -1,4 +1,4 @@
-import { Loader2, RotateCcw, Sparkles, TrendingUp, Target } from "lucide-react";
+import { Compass, Loader2, RotateCcw, Sparkles, TrendingUp, Target } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import type { Coaching } from "@/lib/coaching.functions";
