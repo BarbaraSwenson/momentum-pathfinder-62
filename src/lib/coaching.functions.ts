@@ -76,9 +76,33 @@ export const getCoaching = createServerFn({ method: "POST" })
     const content = payload.choices?.[0]?.message?.content ?? "";
     const cleaned = content.replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
 
+    let parsed: Partial<Coaching>;
     try {
-      return JSON.parse(cleaned) as Coaching;
+      parsed = JSON.parse(cleaned) as Partial<Coaching>;
     } catch {
       throw new Error("The coach returned an unexpected response. Please try again.");
     }
+
+    // Guarantee a complete shape so the results page can never crash on a
+    // missing field if the model omits something.
+    const results = data as Results;
+    const fallback = getPracticeForCategory(results.opportunity.id);
+
+    return {
+      overall: parsed.overall ?? "",
+      strength: parsed.strength ?? "",
+      opportunity: parsed.opportunity ?? "",
+      practice: {
+        name: parsed.practice?.name ?? fallback.name,
+        why: parsed.practice?.why ?? fallback.description,
+        exercise: parsed.practice?.exercise ?? fallback.exercise ?? fallback.description,
+      },
+      actions: Array.isArray(parsed.actions) ? parsed.actions : [],
+      experiment: {
+        title: parsed.experiment?.title ?? "Your 7-Day Momentum Experiment",
+        summary: parsed.experiment?.summary ?? "",
+        days: Array.isArray(parsed.experiment?.days) ? parsed.experiment.days : [],
+      },
+    };
   });
+
