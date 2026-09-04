@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 import { SYSTEM_PROMPT, buildUserPrompt } from "./ai-prompts";
+import { getPracticeForCategory } from "./momentum-method";
 import type { Results } from "./scoring";
 
 const CategoryScoreSchema = z.object({
@@ -95,7 +96,7 @@ export const getCoaching = createServerFn({ method: "POST" })
       practice: {
         name: parsed.practice?.name ?? fallback.name,
         why: parsed.practice?.why ?? fallback.description,
-        exercise: parsed.practice?.exercise ?? fallback.exercise ?? fallback.description,
+        exercise: parsed.practice?.exercise ?? fallback.description,
       },
       actions: Array.isArray(parsed.actions) ? parsed.actions : [],
       experiment: {
