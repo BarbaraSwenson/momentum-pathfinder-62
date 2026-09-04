@@ -116,6 +116,29 @@ export function Results({ results, coaching, loading, error, onRetry, onRetake }
             <p className="mt-3 leading-relaxed text-muted-foreground">{coaching.opportunity}</p>
           </Section>
 
+          <section className="rise overflow-hidden rounded-3xl bg-sage p-6 text-sage-foreground shadow-[var(--shadow-lift)] sm:p-8">
+            <div className="flex min-w-0 items-center gap-3">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-sage-foreground/15">
+                <Compass className="h-5 w-5" />
+              </span>
+              <h2 className="truncate text-xl sm:text-2xl">
+                Your Recommended Momentum Practice
+              </h2>
+            </div>
+            <p className="mt-5 font-[family-name:var(--font-display)] text-3xl leading-tight sm:text-4xl">
+              {coaching.practice.name}
+            </p>
+            <p className="mt-3 leading-relaxed text-sage-foreground/85">
+              {coaching.practice.why}
+            </p>
+            <div className="mt-6 rounded-2xl bg-sage-foreground/10 p-5">
+              <p className="text-xs font-medium uppercase tracking-[0.22em] text-sage-foreground/70">
+                Try it today
+              </p>
+              <p className="mt-2 leading-relaxed">{coaching.practice.exercise}</p>
+            </div>
+          </section>
+
           <Section icon={<Sparkles className="h-5 w-5" />} title="Your 3 Recommended Moves">
             <ol className="space-y-4">
               {coaching.actions.map((action, i) => (
