@@ -42,7 +42,7 @@ export function calculateResults(answers: Record<number, number>): Results {
   return {
     overallScore,
     categories,
-    strength: sorted[0],
-    opportunity: sorted[sorted.length - 1],
+    strength: sorted[0]!,
+    opportunity: sorted[sorted.length - 1]!,
   };
 }

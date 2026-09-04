@@ -12,7 +12,7 @@ export function Assessment({ onComplete, onExit }: Props) {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
 
-  const question = QUESTIONS[index];
+  const question = QUESTIONS[index]!;
   const progress = ((index + 1) / QUESTIONS.length) * 100;
 
   function choose(value: number) {
