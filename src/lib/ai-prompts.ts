@@ -35,6 +35,8 @@ export function buildUserPrompt(results: Results): string {
     .map((c) => `- ${c.name}: ${c.percent}% (average ${c.average.toFixed(1)} of 5)`)
     .join("\n");
 
+  const practice = PRACTICES.find((p) => p.category === results.opportunity.id)!;
+
   return `Here are the assessment results:
 
 Overall Momentum Score: ${results.overallScore}/100
@@ -45,11 +47,18 @@ ${lines}
 Momentum Strength (highest): ${results.strength.name} (${results.strength.percent}%)
 Biggest Opportunity (lowest): ${results.opportunity.name} (${results.opportunity.percent}%)
 
+The recommended Momentum Method practice is "${practice.name}" because ${results.opportunity.name} is their lowest-scoring category. Use this exact practice name. When personalizing the explanation, consider their other category scores too (for example, how their strength in ${results.strength.name} can support the practice).
+
 Write the coaching interpretation as JSON with exactly this shape:
 {
   "overall": "3-4 sentence overall interpretation of these results",
   "strength": "2-3 sentences about why ${results.strength.name} is their strength and how to use it",
   "opportunity": "2-3 sentences about ${results.opportunity.name} as their biggest opportunity and what it costs them",
+  "practice": {
+    "name": "${practice.name}",
+    "why": "2-3 sentences explaining why this practice was selected for them, referencing their ${results.opportunity.name} score and how their other scores shape it",
+    "exercise": "one simple, concrete exercise they can do today to apply ${practice.name} immediately"
+  },
   "actions": ["action 1", "action 2", "action 3"],
   "experiment": {
     "title": "short name for a seven-day Momentum Experiment",
@@ -61,5 +70,5 @@ Write the coaching interpretation as JSON with exactly this shape:
   }
 }
 
-Each recommended action should be one specific, doable sentence tied to their scores. Return JSON only.`;
+The three recommended actions must each be one specific, doable sentence that reinforces "${practice.name}", tied to their scores. The 7-day Momentum Experiment must be a structured progression for building "${practice.name}" into their week — not generic productivity advice. Return JSON only.`;
 }

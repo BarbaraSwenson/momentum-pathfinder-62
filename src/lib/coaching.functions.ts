@@ -22,6 +22,11 @@ export interface Coaching {
   overall: string;
   strength: string;
   opportunity: string;
+  practice: {
+    name: string;
+    why: string;
+    exercise: string;
+  };
   actions: string[];
   experiment: {
     title: string;
