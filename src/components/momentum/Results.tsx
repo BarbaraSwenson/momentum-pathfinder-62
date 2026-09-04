@@ -51,7 +51,7 @@ function Section({
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-sage-soft text-accent-foreground">
           {icon}
         </span>
-        <h2 className="truncate text-xl sm:text-2xl">{title}</h2>
+        <h2 className="min-w-0 text-xl leading-snug sm:text-2xl">{title}</h2>
       </div>
       <div className="mt-4">{children}</div>
     </section>
@@ -121,7 +121,7 @@ export function Results({ results, coaching, loading, error, onRetry, onRetake }
               <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-sage-foreground/15">
                 <Compass className="h-5 w-5" />
               </span>
-              <h2 className="truncate text-xl sm:text-2xl">
+              <h2 className="min-w-0 text-xl leading-snug sm:text-2xl">
                 Your Recommended Momentum Practice
               </h2>
             </div>
