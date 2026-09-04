@@ -51,6 +51,48 @@ export const CATEGORIES: Category[] = [
   },
 ];
 
+export interface Practice {
+  category: CategoryId;
+  name: string;
+  description: string;
+}
+
+/**
+ * The Momentum Method's signature practices, one per category.
+ * The AI coaching recommends the practice tied to the user's
+ * lowest-scoring category.
+ */
+export const PRACTICES: Practice[] = [
+  {
+    category: "clarity",
+    name: "The Priority Anchor",
+    description:
+      "Identify the single outcome that matters most right now and use it as the filter for competing priorities.",
+  },
+  {
+    category: "focus",
+    name: "The Focus Window",
+    description:
+      "Create a protected block of uninterrupted time devoted to the Priority Anchor.",
+  },
+  {
+    category: "systems",
+    name: "The Repeatability Rule",
+    description:
+      "When an important activity is performed repeatedly, capture the steps and turn it into a simple repeatable process.",
+  },
+  {
+    category: "recovery",
+    name: "The Capacity Check",
+    description:
+      "Plan commitments according to realistic available energy and capacity rather than theoretical available time.",
+  },
+];
+
+export function getPracticeForCategory(id: CategoryId): Practice {
+  return PRACTICES.find((p) => p.category === id)!;
+}
+
 export const SCALE = [
   { value: 1, label: "Not at all true" },
   { value: 2, label: "Rarely true" },
